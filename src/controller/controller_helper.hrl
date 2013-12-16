@@ -25,7 +25,8 @@ json_attributes(Result, [{ Key, Value } | SubList]) ->
 json_attributes(JsonList) ->
   json_attributes([], JsonList).
 
-
+puts(String, Params) ->
+  erlang:display(io:format(String, Params)).
 
 
 % binary_to_atom

@@ -1,5 +1,5 @@
 -module(hello_controller).
--export([hello/1]).
+-export([get_hello/1]).
 -include("controller_helper.hrl").
 
 get_hello(Req) ->
