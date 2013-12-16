@@ -1,0 +1,9 @@
+%% -*- erlang -*-
+{application, mockingjay,
+ [{description, "mockingjay"},
+  {vsn, "0.1"},
+  {modules, []},
+  {registered, []},
+  {mod, {'mockingjay_app', []}},
+  {env, []},
+  {applications, [kernel, stdlib, crypto]}]}.
