@@ -1,5 +1,6 @@
--module(hello).
--compile(export_all).
+-module(hello_controller).
+-export([hello/1]).
+-include("controller_helper.hrl").
 
 get_hello(Req) ->
   QueryStringData = Req:parse_qs(),

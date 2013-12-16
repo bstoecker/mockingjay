@@ -10,16 +10,6 @@
 
 %% External API
 
-start(Options) ->
-  {DocRoot, Options1} = get_option(docroot, Options),
-  Loop = fun (Req) -> 
-    ?MODULE:loop(Req, DocRoot)
-  end,
-  mochiweb_http:start([{name, ?MODULE}, {loop, Loop} | Options1]).
-
-stop() ->
-  mochiweb_http:stop(?MODULE).
-
 loop(Req, DocRoot) ->
   "/" ++ Path = Req:get(path),
   try
@@ -28,18 +18,20 @@ loop(Req, DocRoot) ->
         erlang:display(io:format("Path: ~p~n", [Path])),
 
         case Path of
-          "hello" -> hello:get_hello(Req);
+          "hello" -> hello_controller:get_hello(Req);
           _ -> Req:serve_file(Path, DocRoot)
         end;
 
       'POST' ->
         case Path of
+          "scheduler" -> scheduler_controller:schedule(Req);
           _ ->
             Req:not_found()
         end;
       _ ->
         Req:respond({501, [], []})
     end
+
   catch
     Type:What ->
       Report = ["web request failed",
@@ -55,6 +47,16 @@ loop(Req, DocRoot) ->
       }
     )
   end.
+
+start(Options) ->
+  {DocRoot, Options1} = get_option(docroot, Options),
+  Loop = fun (Req) -> 
+    ?MODULE:loop(Req, DocRoot)
+  end,
+  mochiweb_http:start([{name, ?MODULE}, {loop, Loop} | Options1]).
+
+stop() ->
+  mochiweb_http:stop(?MODULE).
 
 %% Internal API
 
