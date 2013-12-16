@@ -1,0 +1,9 @@
+{application,mockingjay,
+             [{description,"mockingjay"},
+              {vsn,"0.1"},
+              {modules,[hello,mockingjay,mockingjay_app,mockingjay_deps,
+                        mockingjay_sup,mockingjay_web]},
+              {registered,[]},
+              {mod,{mockingjay_app,[]}},
+              {env,[]},
+              {applications,[kernel,stdlib,crypto]}]}.
