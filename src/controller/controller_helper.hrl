@@ -1,3 +1,38 @@
+-include("../../deps/jsonerl/src/jsonerl.hrl").
+
+get_body(Req) ->
+  jsonerl:decode(Req:recv_body()).
+
+get_element_list(Key, Input) -> 
+  {_, Result} = lists:keyfind(Key, 1, tuple_to_list(Input)),
+  Result.
+
+create_record_list(RecordName, StructList) ->
+  create_record_list(RecordName, StructList, []).
+create_record_list(_, [], Result) -> Result;
+create_record_list(RecordName, [Head|StructListTail], Result) ->
+  out:puts("~nHead: ~p, Tail: ~p, Record: ~p, Result: ~p", [Head, StructListTail, RecordName, Result]),
+  Record = jsonerl:struct_to_record(RecordName, tuple_to_list(Head)),
+  out:puts("~nRecord: ~p", [Record]),
+  create_record_list(
+    RecordName,
+    StructListTail,
+    [Record | Result]
+  ).
+
+
+
+
+% struct_to_record
+
+
+
+
+
+
+
+
+
 values_of(Results, []) -> lists:reverse(Results);
 values_of(Results, [Tupel|TupelList]) ->
   values_of([value_of(Tupel)|Results], TupelList).
@@ -13,20 +48,3 @@ get_value(Key, DeserializedBody, Default) ->
 
 get_value(Key, DeserializedBody) -> get_value(Key, DeserializedBody, undefined).
 
-get_body(Body) ->
-  {_, JsonBody} = mochijson2:decode(Body),
-  JsonBody.
-
-json_attributes(Result, []) -> Result;
-json_attributes(Result, [{ Key, Value } | SubList]) ->
-  NewResult = [{ erlang:binary_to_atom(Key, utf8), Value } | Result],
-  json_attributes(NewResult, SubList).
-
-json_attributes(JsonList) ->
-  json_attributes([], JsonList).
-
-puts(String, Params) ->
-  erlang:display(io:format(String, Params)).
-
-
-% binary_to_atom
