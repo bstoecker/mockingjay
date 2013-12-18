@@ -17,15 +17,5 @@ to_struct_list(EmployeeList) ->
     employee, EmployeeList, employee:fields()
   ).
 
-fields() ->
-  record_info(fields, employee).
-
-
-
-
-
-% Valid input for new
-% [{<<"first_name">>, <<"Jules">>},{<<"last_name">>,<<"Winfield">>},{<<"id">>,1}]
-% Valid input for new_list
-% [[{<<"first_name">>, <<"Jules">>},{<<"last_name">>,<<"Winfield">>}],[{<<"id">>,1}, {<<"first_name">>, <<"Vincent">>},{<<"last_name">>,<<"Vega">>},{<<"id">>,2}]]
+fields() -> record_info(fields, employee).
 

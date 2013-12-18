@@ -18,10 +18,9 @@ schedule(Req) ->
       200,
       [{"Content-Type", "application/json"}],
       mochijson2:encode({struct,[
-        { employees, employee:to_struct_list(Employees) }
-        % { activities, ActivityList },
-        % { workloads, WorkloadList },
-        % { interval, Interval }
+        { employees, employee:to_struct_list(Employees) },
+        { activities, activity:to_struct_list(Activities) },
+        { workloads, workload:to_struct_list(Workloads) }
       ]})
     }
   ).

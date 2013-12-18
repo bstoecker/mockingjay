@@ -17,5 +17,4 @@ to_struct_list(ActivityList) ->
     activity, ActivityList, activity:fields()
   ).
 
-fields() ->
-  record_info(fields, activity).
+fields() -> record_info(fields, activity).

@@ -12,7 +12,6 @@ flatten_struct_list(PropList) ->
   flatten_struct_list(PropList, []).
 
 record_list_to_struct_list(RecordName, RecordList, RecordFields) ->
-  out:puts("Hello, I'm here", []),
   record_list_to_struct_list(RecordName, RecordList, RecordFields, []).
 
 %% INTERNAL
@@ -26,7 +25,6 @@ record_list_to_struct_list(_, [], _, Result) -> Result;
 record_list_to_struct_list(
   RecordName, [Head|SubRecordList], RecordFields, Result
 ) ->
-  out:puts("record_to_struct: ~p; ~p", [Head, RecordFields]),
   Struct = record_to_struct(Head, RecordFields),
   record_list_to_struct_list(
     RecordName, SubRecordList, RecordFields, [Struct|Result]
