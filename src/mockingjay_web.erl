@@ -15,7 +15,6 @@ loop(Req, DocRoot) ->
   try
     case Req:get(method) of
       Method when Method =:= 'GET'; Method =:= 'HEAD' ->
-        erlang:display(io:format("Path: ~p~n", [Path])),
 
         case Path of
           "hello" -> hello_controller:get_hello(Req);

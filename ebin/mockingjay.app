@@ -4,7 +4,7 @@
               {modules,[activity,converter,employee,hello,hello_controller,
                         http_protocol_controller,mockingjay,mockingjay_app,
                         mockingjay_deps,mockingjay_sup,mockingjay_web,out,
-                        scheduler_controller]},
+                        scheduler_controller,workload]},
               {registered,[]},
               {mod,{mockingjay_app,[]}},
               {env,[]},
