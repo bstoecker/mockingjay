@@ -17,7 +17,6 @@ loop(Req, DocRoot) ->
       Method when Method =:= 'GET'; Method =:= 'HEAD' ->
 
         case Path of
-          "hello" -> hello_controller:get_hello(Req);
           _ -> Req:serve_file(Path, DocRoot)
         end;
 
