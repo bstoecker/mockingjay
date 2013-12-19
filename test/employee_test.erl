@@ -1,5 +1,5 @@
--module(employee_spec).
--include("../spec_helper.hrl").
+-module(employee_test).
+-include_lib("eunit/include/eunit.hrl").
 
 spec() ->
   describe("employee", fun() ->
