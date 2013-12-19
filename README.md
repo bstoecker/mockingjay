@@ -3,10 +3,8 @@ mockingjay
 
 Try out Mochiweb in Erlang
 
-
 POST /scheduler
-
-POST ga:
+Header: application/json
 
 {
   "message": "Hello World",
