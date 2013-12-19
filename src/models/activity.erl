@@ -1,20 +1,16 @@
 -module(activity).
--export([new/1, new_list/1, fields/0, to_struct_list/1]).
+-export([new/1, new_list/1, fields/0, to_struct_list/1, get/2]).
+-include("../helpers/model_base.hrl").
 
--record(activity, {id, from, to, cathegory, employee_id, workload_id}).
+-record(activity, {id, workload_id, employee_id, from, to, cathegory}).
 
 new(PropList) ->
-  converter:new_record(activity, record_info(fields, activity), PropList).
+  new(PropList, activity, fields()).
 
-new_list(PropListList) -> new_list([], PropListList).
+new_list(PropListList) -> new_list(PropListList, fields()).
 
-new_list(Activities, []) -> Activities;
-new_list(Activities, [Head|SubPropListList]) ->
-  new_list([new(Head)|Activities], SubPropListList).
-
-to_struct_list(ActivityList) ->
-  converter:record_list_to_struct_list(
-    activity, ActivityList, activity:fields()
-  ).
+to_struct_list(ActivityList) -> to_struct_list(ActivityList, fields()).
 
 fields() -> record_info(fields, activity).
+
+get(Activity, Attribute) -> get(Activity, Attribute, fields()).

@@ -30,7 +30,3 @@ to_struct_list_test() ->
   Converted = employee:to_struct_list(EmployeeList),
   ?assertEqual(length(Converted), 2).
 
-
-
-
-  % to_struct_list

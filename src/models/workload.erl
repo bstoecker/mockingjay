@@ -1,21 +1,23 @@
 -module(workload).
--export([new/1, new_list/1, fields/0, to_struct_list/1]).
+-export([new/1, new_list/1, fields/0, to_struct_list/1, get/2]).
+-include("../helpers/record_helper.hrl").
 
 -record(workload, {id, interval, employee_requirements}).
 
 new(PropList) ->
-  Elem = converter:new_record(
+  out:puts("Input: ~p",[PropList]),
+  Elem = new_record(
     workload, record_info(fields, workload), PropList
   ),
   ReqList = converter:flatten_struct_list(Elem#workload.employee_requirements),
   EmplReqList = employee_requirement:new_list(ReqList),
-  NewWorkload = Elem#workload{
+  Elem#workload{
     employee_requirements = EmplReqList
   }.
 
 new_list(PropListList) -> new_list([], PropListList).
 
-new_list(Workloads, []) -> Workloads;
+new_list(Workloads, []) -> lists:reverse(Workloads);
 new_list(Workloads, [Head|SubPropListList]) ->
   new_list([new(Head)|Workloads], SubPropListList).
 
@@ -36,4 +38,12 @@ to_struct_list(WorkloadList) ->
 
 fields() -> record_info(fields, workload).
 
+get(Workload, Attribute) -> get(Workload, Attribute, fields()).
+
+%Internal
+
+new_record(RecordName, Fields, PropList) ->
+  list_to_tuple(
+    [RecordName|[proplists:get_value(X, PropList)
+      || X <- Fields]]).
 
