@@ -5,7 +5,6 @@
 -record(workload, {id, interval, employee_requirements}).
 
 new(PropList) ->
-  out:puts("Input: ~p",[PropList]),
   Elem = new_record(
     workload, record_info(fields, workload), PropList
   ),
@@ -43,7 +42,5 @@ get(Workload, Attribute) -> get(Workload, Attribute, fields()).
 %Internal
 
 new_record(RecordName, Fields, PropList) ->
-  list_to_tuple(
-    [RecordName|[proplists:get_value(X, PropList)
-      || X <- Fields]]).
+  list_to_tuple([RecordName|[proplists:get_value(X, PropList)|| X <- Fields]]).
 
