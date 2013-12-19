@@ -4,8 +4,7 @@
 
 -record(activity, {id, workload_id, employee_id, from, to, cathegory}).
 
-new(PropList) ->
-  new(PropList, activity, fields()).
+new(PropList) -> new(PropList, activity, fields()).
 
 new_list(PropListList) -> new_list(PropListList, fields()).
 
